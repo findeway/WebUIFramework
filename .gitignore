@@ -27,3 +27,5 @@
 /bin/Release/ffmpegsumo.dll
 /bin/Release/icudtl.dat
 /bin/Release/libcef.dll
+/third
+/WebUIApplication/debug.log
