@@ -2,19 +2,19 @@
 #include <atlbase.h>
 #include <atlwin.h>
 #include <atlapp.h>
-#include "WUWebClientBase.h"
+
+#include "WUWebFrmClient.h"
 
 class CWUWebFrm : 
 	public CWindowImpl<CWUWebFrm>,
-	public CWUWebClientBase,
 	public CMessageFilter, 
 	public CIdleHandler
 {
 public:
 	CWUWebFrm(void);
-	~CWUWebFrm(void);
+	virtual ~CWUWebFrm(void);
 	
-	virtual HWND GetHandle();
+	
 	virtual bool Init(RECT rect);
 	virtual bool UnInit();
 
@@ -31,7 +31,6 @@ protected:
 	virtual LRESULT OnWindowPosChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual BOOL OnIdle();
-	virtual void OnDocumentComplete();
-private:
-	IMPLEMENT_REFCOUNTING(CWUWebFrm);
+protected:
+	CefRefPtr<CWUWebFrmClient>				m_pWebFrmClient;
 };

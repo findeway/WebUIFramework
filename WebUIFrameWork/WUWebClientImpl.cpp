@@ -45,7 +45,7 @@ bool CWUWebClientImpl::OnProcessMessageReceived( CefRefPtr<CefBrowser> browser, 
 		CefString strMessageName = message->GetName();
 		CefRefPtr<CefProcessMessage> resultMessage = CefProcessMessage::Create(strMessageName);
 		//支持的JS回调列表,所有可供JS调用的接口都在此处
-		if(strMessageName == _T("WUAPI_GetUid"))
+		if(strMessageName == _T("WUAPI_Test"))
 		{
 			if(argumentList->GetSize() == 1)
 			{

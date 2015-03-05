@@ -246,6 +246,14 @@
 					RelativePath=".\include\WUWebClientImpl.h"
 					>
 				</File>
+				<File
+					RelativePath="..\WebUIApplication\WUWebFrmClient.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\WebUIApplication\WUWebFrmClient.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<File

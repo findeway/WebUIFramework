@@ -3,15 +3,11 @@
 
 CWUWebFrm::CWUWebFrm(void)
 {
+	m_pWebFrmClient = NULL;
 }
 
 CWUWebFrm::~CWUWebFrm(void)
 {
-}
-
-HWND CWUWebFrm::GetHandle()
-{
-	return m_hWnd;
 }
 
 LRESULT CWUWebFrm::OnCreate( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled )
@@ -23,7 +19,7 @@ LRESULT CWUWebFrm::OnCreate( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHan
 	RECT rect = {0};
 	GetClientRect(&rect);
 	Init(rect);
-	CenterWindow(GetHandle());
+	CenterWindow(m_hWnd);
 	return 0;
 }
 
@@ -34,19 +30,19 @@ LRESULT CWUWebFrm::OnClose( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHand
 	pLoop->RemoveMessageFilter(this);
 	pLoop->RemoveIdleHandler(this);
 	bHandled = FALSE;
-	UnInit();
-	return 1L;
+	return 0L;
 }
 
 LRESULT CWUWebFrm::OnDestroy( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled )
 {
+	UnInit();
 	::PostQuitMessage(0);
 	return 1L;
 }
 
 LRESULT CWUWebFrm::OnWindowPosChanged( UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled )
 {
-	CefRefPtr<CefBrowser> ptrBrowser = GetBrowser();
+	CefRefPtr<CefBrowser> ptrBrowser = m_pWebFrmClient->GetBrowser();
 	if(ptrBrowser.get())
 	{
 		HWND hWnd = ptrBrowser->GetHost()->GetWindowHandle();
@@ -72,19 +68,23 @@ BOOL CWUWebFrm::PreTranslateMessage( MSG* pMsg )
 
 bool CWUWebFrm::Init( RECT rect )
 {
-	m_strUrl = L"http://www.baidu.com/";
-	bool result = __super::Init(rect);
-	return result;
+	if(!m_pWebFrmClient)
+	{
+		m_pWebFrmClient = new CWUWebFrmClient();
+	}
+	if(m_pWebFrmClient)
+	{
+		return m_pWebFrmClient->Init(m_hWnd,rect);
+	}
+	return false;
 }
 
 bool CWUWebFrm::UnInit()
 {
-	__super::UnInit();
-	return true;
+	if(m_pWebFrmClient)
+	{
+		bool bResult = m_pWebFrmClient->UnInit();
+		return bResult;
+	}
+	return false;
 }
-
-void CWUWebFrm::OnDocumentComplete()
-{
-}
-
-

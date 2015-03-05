@@ -18,7 +18,7 @@ class CWUWebClientImpl :
 {
 public:
 	CWUWebClientImpl(void);
-	~CWUWebClientImpl(void);
+	virtual ~CWUWebClientImpl(void);
 	
 	//CefClient½Ó¿Ú
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() OVERRIDE;

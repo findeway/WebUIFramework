@@ -36,7 +36,7 @@ int CWUWebApp::Run( HINSTANCE hContext )
 
 	CWUWebFrm *webFrm = new CWUWebFrm();
 	RECT rect = {0,0,800,600};
-	webFrm->Create(NULL,rect,NULL,WS_OVERLAPPEDWINDOW|WS_VISIBLE|WS_CLIPCHILDREN|WS_CLIPSIBLINGS);
+	webFrm->Create(NULL,rect,NULL,WS_POPUP|WS_VISIBLE|WS_CLIPCHILDREN|WS_CLIPSIBLINGS);
 
 	theLoop.Run();
 	CefShutdown();

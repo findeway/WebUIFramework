@@ -9,7 +9,7 @@ class CWUWebClientBase :
 {
 public:
 	CWUWebClientBase(void);
-	~CWUWebClientBase(void);
+	virtual ~CWUWebClientBase(void);
 	virtual HWND GetHandle() = 0;
 	void Refresh(bool bIgnoreCache = false);
 	//执行简单js，不需要和Renderer进程交互，无返回值
