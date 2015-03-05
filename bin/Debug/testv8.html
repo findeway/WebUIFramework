@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+			function OnPlay()
+			{
+				alert(123);
+				return "123";
+			}
+			function testv8()
+			{
+				WebUIApp.setWebUICallback("WUAPI_GetUid",OnPlay);
+				WebUIApp.DoWebUICall("WUAPI_GetUid","param");
+				return true;
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<input type="button" value="testv8" onclick="testv8();" />
+		</div>
+	</body>
+</html>
